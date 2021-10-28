@@ -143,6 +143,18 @@ class View extends React.Component<ViewProps & DOMProps, ViewState> {
 
   panelNodes: { [id: string]: HTMLDivElement } = {};
 
+  componentDidMount() {
+    const { popout, modal } = this.props;
+
+    if (popout) {
+      warn('Свойство popout устарело и будет удалено в 5.0.0. Используйте одноименное свойство у SplitLayout.');
+    }
+
+    if (modal) {
+      warn('Свойство modal устарело и будет удалено в 5.0.0. Используйте одноименное свойство у SplitLayout.');
+    }
+  }
+
   componentWillUnmount() {
     const id = getNavId(this.props);
     if (id) {
