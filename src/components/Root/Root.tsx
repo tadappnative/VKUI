@@ -107,6 +107,13 @@ const Root: React.FC<RootProps> = ({
     }
   };
 
+  if (popout) {
+    warn('Свойство popout устарело и будет удалено в 5.0.0. Используйте одноименное свойство у SplitLayout.');
+  }
+  if (modal) {
+    warn('Свойство modal устарело и будет удалено в 5.0.0. Используйте одноименное свойство у SplitLayout.');
+  }
+
   return (
     <div {...restProps} vkuiClass={classNames(getClassName('Root', platform), {
       'Root--transition': !disableAnimation && transition,
