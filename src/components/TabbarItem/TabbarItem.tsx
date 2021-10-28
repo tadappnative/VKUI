@@ -4,7 +4,10 @@ import Counter from '../Counter/Counter';
 import { classNames } from '../../lib/classNames';
 import { usePlatform } from '../../hooks/usePlatform';
 import { hasReactNode } from '../../lib/utils';
+import { warnOnce } from '../../lib/warnOnce';
 import './TabbarItem.css';
+
+const warn = warnOnce('TabbarItemProps');
 
 export interface TabbarItemProps extends React.HTMLAttributes<HTMLElement>, React.AnchorHTMLAttributes<HTMLElement> {
   selected?: boolean;
@@ -26,6 +29,10 @@ const TabbarItem: React.FunctionComponent<TabbarItemProps> = (props: TabbarItemP
   const { children, selected, label, indicator, text, ...restProps } = props;
   const platform = usePlatform();
   const Component: React.ElementType = restProps.href ? 'a' : 'div';
+
+  if (label) {
+    warn('Свойство label устарело и будет удалено в 5.0.0. Используйте indicator.');
+  }
 
   return (
     <Component
