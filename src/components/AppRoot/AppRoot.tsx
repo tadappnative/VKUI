@@ -50,13 +50,14 @@ export const AppRoot: React.FC<AppRootProps> = withAdaptivity(({
     initialized.current = true;
   }
 
-  if (process.env.NODE_ENV === 'development') {
-    if (scroll !== 'global' && mode !== 'embedded') {
-      warn('Scroll modes only supported in embedded mode');
-    }
-    if (_mode && _embedded) {
-      warn(`mode="${mode}" overrides embedded`);
-    }
+  if (scroll !== 'global' && mode !== 'embedded') {
+    warn('Свойство scroll поддерживается только в embedded-режиме');
+  }
+  if (_mode && _embedded) {
+    warn(`Свойство mode="${mode}" переопределяет свойство embedded`);
+  }
+  if (_embedded) {
+    warn('Свойство embedded устарело и будет удалено в 5.0.0. Используйте mode="embedded".');
   }
 
   // setup portal
