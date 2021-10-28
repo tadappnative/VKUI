@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Icon24Dismiss } from '@vkontakte/icons';
+import { warnOnce } from '../../lib/warnOnce';
 import Button from '../Button/Button';
 import SimpleCell from '../SimpleCell/SimpleCell';
 import Avatar from '../Avatar/Avatar';
@@ -37,6 +38,8 @@ type BannerData = {
   ageRestriction?: number;
 };
 
+const warn = warnOnce('PromoBanner');
+
 export interface PromoBannerProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Данные рекламного баннера, полученные из VKWebAppGetAds */
   bannerData: BannerData;
@@ -54,6 +57,10 @@ const PromoBanner = (props: PromoBannerProps) => {
     bannerData.ageRestrictions != null
       ? parseInt(bannerData.ageRestrictions)
       : bannerData.ageRestriction;
+
+  if (bannerData.ageRestriction) {
+    warn('Свойство bannerData.ageRestriction устарело и будет удалено в 5.0.0. Используйте bannerData.ageRestrictions');
+  }
 
   const [currentPixel, setCurrentPixel] = React.useState('');
 
