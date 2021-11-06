@@ -736,8 +736,10 @@ class ModalRootTouchComponent extends React.Component<ModalRootProps & DOMProps,
     cancelAnimationFrame(this.frameIds[frameId]);
 
     this.frameIds[frameId] = requestAnimationFrame(() => {
-      setTransformStyle(modalState.innerElement, `translate3d(0, ${percent}%, 0)`);
-
+      console.log("START");
+      if (modalState.innerElement !== null) {
+        setTransformStyle(modalState.innerElement, `translate3d(0, ${percent}%, 0)`);
+      }
       if (modalState.type === ModalType.PAGE && modalState.footerElement) {
         const footerHeight = modalState.footerElement.offsetHeight;
         const factor = modalState.innerElement.offsetHeight * (percent / 100);
